@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/Usuario/GetAll.js" type="text/javascript"></script>
+    <style>
+        label {
+            color: black;
+        }
+    </style>
+</head>
+<h2 class="text-center">Usuarios</h2>
+<hr />
+<div>
+    <button class="btn btn-success" onclick="ModalOpen(0)">Agregar usuario</button>
+</div>
+<hr />
+<div class="container">
+    <table hidden id="tablaUsuario" class="table table-dark table-hover text-center">
+        <thead>
+            <tr>
+                <th>Editar</th>
+                <th>Nombre</th>
+                <th>Apellido paterno</th>
+                <th>Apellido materno</th>
+                <th>Edad</th>
+                <th>Email</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <div hidden id="divAlerta" role="alert" class="alert alert-warning">
+        Debes iniciar sesión.
+    </div>
+
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black">Usuario</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="col">
+                        <input hidden id="txtIdUsuario" />
+                        <label>Nombre</label>
+                        <input id="txtNombre" class="form-control" placeholder="Nombre" /><br />
+                        <label>Apellido paterno</label>
+                        <input id="txtApellidoPaterno" class="form-control" placeholder="Apellido paterno" /><br />
+                        <label>Apellido materno</label>
+                        <input id="txtApellidoMaterno" class="form-control" placeholder="Apellido materno" /><br />
+                        <label>Edad</label>
+                        <input id="txtEdad" class="form-control" placeholder="Edad" /><br />
+                        <label>Email</label>
+                        <input id="txtEmail" class="form-control" placeholder="Email" /><br />
+                        <label>Contraseña</label>
+                        <input id="txtPassword" class="form-control" type="password" placeholder="Contraseña" /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="ModalClose()" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <a id="btnContinuar" onclick="Save()" class="btn btn-success" data-dismiss="modal">Guardar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modalAviso" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black">Mensaje</h5>
+                </div>
+                <div class="modal-body">
+                    <label id="txtMessage"></label>
+                </div>
+                <div class="modal-footer">
+                    <a id="btnContinuar" onclick="ModalClose()" class="btn btn-success" data-dismiss="modal">Continuar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var id = sessionStorage.getItem('IdUsuario');
+    if (id != null) {
+        document.getElementById('tablaUsuario').removeAttribute('hidden');
+    }
+    else {
+        document.getElementById('divAlerta').removeAttribute('hidden');
+    }
+</script>
